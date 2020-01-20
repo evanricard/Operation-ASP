@@ -38,6 +38,7 @@ namespace OperationASP
 
             //Can extend the additions
             services.AddScoped<IUserStore<CoreUser>, CoreUserStore>();
+            //services.AddMvc().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

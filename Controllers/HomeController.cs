@@ -33,7 +33,7 @@ namespace OperationASP.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View();asdasd
+            return View();
         }
 
         [HttpPost]
