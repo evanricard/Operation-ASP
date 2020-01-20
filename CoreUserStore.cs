@@ -62,9 +62,13 @@ namespace OperationASP
             }
         }
 
-        public Task<CoreUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
+        public async Task<CoreUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
-            ;
+            using (var connection = GetOpenConnection())
+            {
+                //TODO: 
+                return await connection.QueryFirstOrDefaultAsync<CoreUser>("select * From CoreUser where Name = @name", new { name = normalizedUserName });
+            }
         }
 
         public Task<string> GetNormalizedUserNameAsync(CoreUser user, CancellationToken cancellationToken)

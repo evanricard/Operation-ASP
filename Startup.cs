@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Identity.Core;
 
@@ -26,9 +27,16 @@ namespace OperationASP
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddIdentityCore<string>(options => { });
+
+            services.AddIdentityCore<CoreUser>(options =>
+            {
+
+            });
 
             //service our stores
+            //services.TryAddScoped<IUserStore<CoreUser>, CoreUserStore>();
+
+            //Can extend the additions
             services.AddScoped<IUserStore<CoreUser>, CoreUserStore>();
         }
 
