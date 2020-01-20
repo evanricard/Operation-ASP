@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -18,32 +20,36 @@ namespace OperationASP
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration;  
         }
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
 
+
             services.AddIdentityCore<CoreUser>(options =>
             {
-
+                //ok
             });
 
-            //service our stores
-            //services.TryAddScoped<IUserStore<CoreUser>, CoreUserStore>();
 
-            //Can extend the additions
+            /// AddScoped() services are created once per client request | inject the service into the Invoke or InvokeAsync method.
             services.AddScoped<IUserStore<CoreUser>, CoreUserStore>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie("Cookies", options => options.LoginPath = "/Home/Login");
+
             //services.AddMvc().AddRazorRuntimeCompilation();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // Use this method to configure the HTTP request pipeline at runtime.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -51,22 +57,32 @@ namespace OperationASP
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+
             app.UseRouting();
 
             app.UseAuthorization();
 
+            app.UseAuthentication();
+
+            //begin routing
             app.UseEndpoints(endpoints =>
             {
+                //Can also use MapDynamicControllerRoute<DynamicRouteValueTransformer>()
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                                                                    /*.RequireAuthorization();*/
+
             });
+
+            //env.
+
         }
     }
 }

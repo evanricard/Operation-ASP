@@ -1,12 +1,38 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home/Index Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <aside>
-        @*<*@
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+       
         <ul>Identity</ul>
-        @*</li>*@
-    </aside>
-</div>
+ 
+
+        <h1>Login</h1>
+        
+        <h1><a href="/Home/About">About</a></h1>
+        <button type="button" asp-route="About" method="get"/>
+@* Tag stuff *@
+        @*asp-page-handler="Home/Login"*@
+        @*asp-action=""*@
+
+        @*asp-frag specifies a page where the # character is found*@
+        @*asp-fragment=""*@
+
+        @*asp- route specifies a "route" which handles the relation between action and controller*@
+        @*asp-route=""*@
+
+        @*asp-all-route-data is a dictionary-key data structure...todo *@
+        @*asp-all-route-data=""*@
+
+        @*asp attributes can be combined            *@
+
+        @*<a class="btn btn-info" asp-action="ActionName"
+        asp-all-route-data="parms"
+        asp-route-id="@item.ID">Action</a>*@
+
+        @*^ generates the following
+        sitename.com/controller/action/{id}?parm1=parm1&parm2=parm2*@
+@*  *@
+
+    </div>

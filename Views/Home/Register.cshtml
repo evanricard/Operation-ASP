@@ -9,9 +9,11 @@
 
 <div class="row">
     <div class="">
-        @*<h1>Registrar - @Model.UserName</h1>*@
+        @*<h1>@Model.UserName</h1>*@
+        @*<form asp-page-handler="@Model.HandlerName" method="post">*@
         <form asp-action="Register" method="post">
             <div class="form-group">
+                @* We don't have to prefix with 'Model', remember*@
                 <label asp-for="UserName" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
                     <input asp-for="UserName" class="form-control" />
@@ -32,11 +34,14 @@
                     <input asp-for="ConfirmPassword" class="form-control" />
                 </div>
             </div>
+            @*Can explictly inform other processes  *@
+            @*<a asp-page="/CoreUser/Remove" asp-page-handler="Delete">Delete</a> *@
+            @*<input type="submit" value="Delete Customer" asp-route-handler="delete" />*@
             <input asp-route="" type="submit" class="">
         </form>
     </div>
 </div>
 
 @*@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}*@
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }*@

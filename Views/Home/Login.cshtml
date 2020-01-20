@@ -1,0 +1,40 @@
+﻿@model LoginModel
+@{
+    //ViewData / ViewBag
+    ViewData["Title"] = "Login";
+}
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="form-group">
+
+        @*<input type="" value="" />*@
+        <input asp-for="Password">
+
+        <input asp-for="UserName">
+        <input type="button" title="Login" class="btn btn-outline-primary">
+        <div asp-validation-summary="All">
+        </div>
+    </div>
+
+}
+
+@*@using Microsoft.AspNetCore.Html
+
+@functions {
+    public static IHtmlContent Repeat(IEnumerable<dynamic> items, int times,
+        Func<dynamic, IHtmlContent> template)
+    {
+        var html = new HtmlContentBuilder();
+
+        foreach (var item in items)
+        {
+            for (var i = 0; i < times; i++)
+            {
+                html.AppendHtml(template(item));
+            }
+        }
+
+        return html;
+    }
+}*@

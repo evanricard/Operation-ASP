@@ -1,0 +1,17 @@
+﻿Route Constraints
+Can constrain by primitives and then specific properties of primitives
+guid	{id:guid}	
+                GuidRouteConstraint	Matches a valid Guid value
+length(length)  id: length(12)}
+                LengthRouteConstraint Constrains a route parameter to be a string of a given length or within a given range of lengths. 	
+maxlength(value) id: maxlength(8)}
+                MaxLengthRouteConstraint Constrains a route parameter to be a string with a maximum length.
+minlength(value)  id: minlength(4)}
+                MinLengthRouteConstraint Constrains a route parameter to be a string with a maximum length.
+range(min, max) id: range(18, 120)}
+                RangeRouteConstraint Constraints a route parameter to be an integer within a given range of values.
+min(value) id: min(18)}
+                MinRouteConstraint Constrains a route parameter to be a long with a minimum value.
+max(value) id: max(120)}
+                MaxRouteConstraint Constrains a route parameter to be an integer with a maximum value.
+
